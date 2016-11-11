@@ -25,7 +25,7 @@
 
   - name: ensure droplets exist
     digital_ocean: >
-      state=present
+      state=absent
       command=droplet
       name={{ item }}
       unique_name=yes
@@ -36,11 +36,3 @@
       api_token={{ do_token }}
     with_items: droplets
     register: droplet_details
-
-  - name: Add new droplets to host group
-    add_host: hostname={{ item.droplet.ip_address }} groupname=launched
-    with_items: droplet_details.results
-
-- hosts: launched
-  roles:
-    - geerlingguy.nginx
