@@ -15,9 +15,11 @@ This script requires a paid Digital Ocean account with a Digital Ocean [Personal
 
 ### Using this Script
 
-This guide will walk you through [installing an Ansible Control Server](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04). 
+Once you have setup a control server, this script allows you to automatically create and remove fully-configured web servers.
 
 #### Create a Control Server
+
+This guide will walk you through [installing an Ansible Control Server](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04). 
 
 Set up a [Ubuntu Server](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
 Enable [automatic security updates](https://help.ubuntu.com/community/AutomaticSecurityUpdates). I like the unattended-upgrades 
