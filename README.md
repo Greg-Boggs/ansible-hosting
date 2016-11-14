@@ -1,9 +1,9 @@
 ## Automated Ansible Hosting on Digital Ocean
 
-Ansible Hosting is an Ansible-based script that purchases a Droplet from Digital Ocean and automatically installs a fully-
-configured web server on the new Droplet. To run this script, you need anAnsible control server which could either
-be your laptop or a Droplet on Digital Ocean. Using this script requires a Digital Ocean account, and it will cost money
-because it creates a new Droplet for you.
+Ansible Hosting is an Ansible-based script that purchases a Droplet from Digital Ocean and automatically installs a fully-configured
+web server on the new Droplet. To run this script, you need anAnsible control server which could either be your laptop or
+a Droplet on Digital Ocean. Using this script requires a Digital Ocean account, and it will cost money because it creates a 
+new Droplet for you.
 
 This script is the foundation for open-source web hosting. This script is made possible by the work of many
 amazing folks and it's given away in the same spirit. Use it if you like. If you do, please consider sharing
