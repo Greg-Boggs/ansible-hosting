@@ -42,7 +42,7 @@
     with_items: droplet_details.results
     
   - name: Wait for SSH to come up
-    wait_for: host={{ item.droplet.ip_address }} port=22 delay=60 timeout=320 state=started
+    wait_for: host={{ item.droplet.ip_address }} port=22 delay=1 timeout=320 state=started
     with_items: '{{droplet_details.results}}'
 
 - hosts: launched
@@ -51,5 +51,13 @@
   pre_tasks:
     - name: 'install python2'
       raw: sudo apt-get -y install python-simplejson
+
+    - name: Gathering facts
+      setup:
+  vars_files:
+    - vars/main.yml
   roles:
+    - geerlingguy.firewall
+    - geerlingguy.mysql
     - geerlingguy.nginx
+    - geerlingguy.php
