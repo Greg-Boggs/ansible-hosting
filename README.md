@@ -65,4 +65,8 @@ Now, run the script and you have a fully configured web server ready to go!
 This command will delete your new server and prevent you from incuring any charges if you are just testing this script.
 
     ansible-playbook remove.yml
-    
+
+#### Future Plans
+
+I plan to add support for Linode and Amazon in the future. I chose Digital Ocean for the starting point because they currently
+have better written Ansible documentation. 
