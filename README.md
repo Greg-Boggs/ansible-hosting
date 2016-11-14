@@ -1,27 +1,26 @@
 ## Ansible Hosting Intro
 
 Ansible Hosting is an Ansible-based script that purchases a Droplet from Digital Ocean and automatically installs a fully-
-configured web server on the new Droplet. All you need to use this script is an Ansible control server which could either
+configured web server on the new Droplet. To run this script, you need anAnsible control server which could either
 be your laptop or a Droplet on Digital Ocean. Using this script requires a Digital Ocean account, and it will cost money
-because it creates a new Droplet for you on Digital Ocean.
+because it creates a new Droplet for you.
 
-This script is the foundation for an open-source web hosting company. This script is made possible by the work of many
+This script is the foundation for open-source web hosting. This script is made possible by the work of many
 amazing folks and it's given away in the same spirit. Use it if you like. If you do, please consider sharing
 your code back to the project. A link to http://www.greboggs.com would be nice too. But, that is, of course, optional.
 
-
 ### Requirements
 
-This script requires a paid Digital Ocean account with a Digital Ocean (Personal Access Token)[https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2].
+This script requires a paid Digital Ocean account with a Digital Ocean [Personal Access Token](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2).
 
 ### Using this Script
 
-This guide will walk you through (installing an Ansible Control Server)[https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04]. 
+This guide will walk you through [installing an Ansible Control Server](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04). 
 
 #### Create a Control Server
 
-Set up a (basic Ubuntu Server)[https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04].
-Enable (automatic security updates)[https://help.ubuntu.com/community/AutomaticSecurityUpdates]. I like the unattended-upgrades 
+Set up a [Ubuntu Server](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
+Enable [automatic security updates](https://help.ubuntu.com/community/AutomaticSecurityUpdates). I like the unattended-upgrades 
  method.
  
 #### Add Your Digital Ocean API Key
