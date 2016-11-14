@@ -16,18 +16,18 @@ This script requires a paid Digital Ocean account with a Digital Ocean [Personal
 ### Using this Script
 
 Once you have setup a control server, this script allows you to automatically create and remove fully-configured web servers.
+The steps below will get you up and running: 
 
 #### Create a Control Server
 
-This guide will walk you through [installing an Ansible Control Server](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04). 
-
-Set up a [Ubuntu Server](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
-Enable [automatic security updates](https://help.ubuntu.com/community/AutomaticSecurityUpdates). I like the unattended-upgrades 
+This guide will walk you through [installing an Ansible Control Server](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2-with-ansible-2-0-on-ubuntu-16-04). Set up a 
+[Ubuntu Server](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04).
+Enable [automatic security updates](https://help.ubuntu.com/community/AutomaticSecurityUpdates). I use the unattended-upgrades 
  method.
  
 #### Add Your Digital Ocean API Key
 
-The script requires a Digital Ocean API Key to create a Droplet. If you remove it after testing, you will incur only a
+This script requires a Digital Ocean API Key to create a Droplet. If you remove it after testing, you will incur only a
 small fee. If you don't want to be billed, you 
 
     echo 'export DO_API_KEY=<YOURKEY>' >> ~/.bashrc
@@ -55,7 +55,7 @@ This script relies on Ansible Galaxy Roles on your control server. So, before ru
     sudo ansible-galaxy install geerlingguy.mysql
     sudo ansible-galaxy install geerlingguy.php
     
-#### Run the Script
+#### Run the Script to Create a New Web Server
 
 Now, run the script and you have a fully configured web server ready to go!
 
