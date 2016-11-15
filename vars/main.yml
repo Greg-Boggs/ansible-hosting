@@ -1,20 +1,40 @@
 ---
-php_webserver_daemon: nginx
-php_enable_php_fpm: true
-php_packages:
-  - php
-  - php-cli
-  - php-common
-  - php-gd
-  - php-imap
-  - php-ldap
-  - php-mbstring
-  - php-pdo
-  - php-pear
-  - php-xml
-  - php-xmlrpc
-  - php-fpm
-
+# Database
 mysql_root_password: root
 
-nginx_worker_connections: 1024
+# PHP
+php_webserver_daemon: "nginx"
+php_install_recommends: yes
+php_executable: "php"
+php_memory_limit: "512M"
+php_max_execution_time: "90"
+php_upload_max_filesize: "256M"
+php_post_max_size: "256M"
+php_enable_webserver: true
+
+#PHP FPM
+php_enable_php_fpm: true
+php_fpm_listen: /run/php/php7.0-fpm.sock
+
+# Use the official Nginx PPA for Ubuntu, and the version to use if so.
+
+# The name of the nginx apt/yum package to install.
+
+nginx_worker_processes: "{{ ansible_processor_vcpus | default(ansible_processor_count) }}"
+nginx_worker_connections: "1024"
+nginx_multi_accept: "off"
+
+nginx_error_log: "/var/log/nginx/error.log warn"
+nginx_access_log: "/var/log/nginx/access.log main buffer=16k"
+
+nginx_sendfile: "on"
+nginx_tcp_nopush: "on"
+nginx_tcp_nodelay: "on"
+
+nginx_keepalive_timeout: "65"
+nginx_keepalive_requests: "100"
+
+nginx_client_max_body_size: "64m"
+
+nginx_server_names_hash_bucket_size: "64"
+
