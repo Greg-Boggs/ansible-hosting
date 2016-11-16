@@ -57,8 +57,8 @@
   vars_files:
     - vars/main.yml
   roles:
- #   - geerlingguy.firewall
- #   - geerlingguy.mysql
+    - geerlingguy.firewall
+    - geerlingguy.mysql
     - geerlingguy.nginx
     - geerlingguy.php
   tasks:

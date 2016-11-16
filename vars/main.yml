@@ -16,25 +16,48 @@ php_enable_webserver: true
 php_enable_php_fpm: true
 php_fpm_listen: /run/php/php7.0-fpm.sock
 
-# Use the official Nginx PPA for Ubuntu, and the version to use if so.
-
-# The name of the nginx apt/yum package to install.
-
 nginx_worker_processes: "{{ ansible_processor_vcpus | default(ansible_processor_count) }}"
 nginx_worker_connections: "1024"
 nginx_multi_accept: "off"
-
 nginx_error_log: "/var/log/nginx/error.log warn"
 nginx_access_log: "/var/log/nginx/access.log main buffer=16k"
-
 nginx_sendfile: "on"
 nginx_tcp_nopush: "on"
 nginx_tcp_nodelay: "on"
-
 nginx_keepalive_timeout: "65"
 nginx_keepalive_requests: "100"
-
 nginx_client_max_body_size: "64m"
-
 nginx_server_names_hash_bucket_size: "64"
 
+#vhost configs
+nginx_remove_default_vhost: true
+nginx_vhosts:
+  - listen: "80 default_server"
+
+    server_name: "_"
+    root: "/var/www/html"
+    index: "index.html index.htm index.php"
+    extra_parameters: |
+        location / {
+            # First attempt to serve request as file, then
+            # as directory, then fall back to displaying a 404.
+            try_files $uri $uri/ =404;
+        }
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        location ~ \.php$ {
+             include snippets/fastcgi-php.conf;
+    
+            # With php7.0-cgi alone:
+            # fastcgi_pass 127.0.0.1:9000;
+            # With php7.0-fpm:
+            fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+        }
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        location ~ /\.ht {
+            deny all;
+        }
