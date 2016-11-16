@@ -1,4 +1,7 @@
 ---
+# Security
+security_ssh_permit_root_login: yes
+
 # Database
 mysql_root_password: root
 

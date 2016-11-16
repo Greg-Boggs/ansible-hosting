@@ -50,10 +50,7 @@ small fee. If you don't want to be billed, you
 
 This script relies on Ansible Galaxy Roles on your control server. So, before running the script, install them!
 
-    sudo ansible-galaxy install geerlingguy.firewall
-    sudo ansible-galaxy install geerlingguy.nginx
-    sudo ansible-galaxy install geerlingguy.mysql
-    sudo ansible-galaxy install geerlingguy.php
+    ansible-galaxy install -r requirements.yml --force
     
 #### Run the Script to Create a New Web Server
 
