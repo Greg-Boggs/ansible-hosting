@@ -1,9 +1,14 @@
 ---
 # Security
 security_ssh_permit_root_login: yes
+security_fail2ban_enabled: false
 
 # Database
 mysql_root_password: root
+mysql_packages:
+  - mariadb-client
+  - mariadb-server
+  - python-mysqldb
 
 # PHP
 php_webserver_daemon: "nginx"
