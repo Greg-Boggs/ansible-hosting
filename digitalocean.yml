@@ -65,6 +65,8 @@
     - geerlingguy.ansible
     - mglaman.wp-cli
   tasks:
+    - service: name=nginx state=restarted
+    - service: name=php7.0-fpm state=restarted
     - git: repo="https://github.com/WordPress/WordPress.git"
            dest=/root/html
     - git: repo="https://github.com/Greg-Boggs/ansible-deploy.git"
@@ -72,5 +74,5 @@
     - shell: ansible-galaxy install -r ansible-deploy/requirements.yml --force
     - shell: ansible-playbook -i ansible-deploy/hosts ansible-deploy/deploy.yml
     - shell: cd /var/www/current/html;wp core config --dbname=wp --dbuser=wp --dbpass=CHANGETHIS --allow-root;
-    - shell: cd /var/www/current/html;wp core install --allow-root --url="test.electricdev.com" --title="Electric Dev Test" --admin_user="electric_admin" --admin_password="workstest" --admin_email="me@gregboggs.com"
+    - shell: cd /var/www/current/html;wp core install --allow-root --url="test.electricdev.net" --title="Electric Dev Test" --admin_user="electric_admin" --admin_password="workstest" --admin_email="me@gregboggs.com"
 
