@@ -9,7 +9,15 @@ mysql_packages:
   - mariadb-client
   - mariadb-server
   - python-mysqldb
-
+mysql_databases:
+  - name: wp
+    encoding: latin1
+    collation: latin1_general_ci
+mysql_users:
+  - name: wp
+    host: localhost
+    password: CHANGETHIS
+    priv: "wp.*:ALL"
 # PHP
 php_webserver_daemon: "nginx"
 php_install_recommends: yes
@@ -43,7 +51,7 @@ nginx_vhosts:
   - listen: "80 default_server"
 
     server_name: "_"
-    root: "/var/www/html"
+    root: "/var/www/current/html"
     index: "index.html index.htm index.php"
     extra_parameters: |
         location / {
@@ -69,3 +77,4 @@ nginx_vhosts:
         location ~ /\.ht {
             deny all;
         }
+
