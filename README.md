@@ -1,6 +1,6 @@
-## Automated Ansible Hosting on Digital Ocean
+## Automated Ansible Hosting on Digital Ocean or Linode
 
-Ansible Hosting is an Ansible-based script that purchases a Droplet from Digital Ocean and automatically installs a fully-configured
+Ansible Hosting is an Ansible-based script that purchases a Droplet from Digital Ocean or a Node from Linode and automatically installs a fully-configured
 web server on the new Droplet. To run this script, you need an Ansible control server which could either be your laptop or
 a Droplet on Digital Ocean. Using this script requires a Digital Ocean account, and it will cost money because it creates a 
 new Droplet for you.
@@ -33,6 +33,18 @@ small fee. If you don't want to be billed, you
     echo 'export DO_API_KEY=<YOURKEY>' >> ~/.bashrc
     source ~/.bashrc
     
+#### Install Linode Requirements
+
+If you're going to use the Linode script, you must install some extra items. Including your pubkey as a string because I couldn't get the Linode module to load a pubkey file. 
+
+    sudo apt-get install python-pycurl
+    pip install --upgrade pip
+    sudo pip install linode-python
+    echo 'export PUB_KEY=<YOURKEY>' >> ~/.bashrc
+    source ~/.bashrc
+    
+*NOTE* You must enable metered billing manually if you wish to use hourly billing. There is no remove script for Linode and each run creates a new Node. You must manually delete your Nodes if you don't want them. Backups are not enabled by default.
+
 #### Install Ansible
 
     sudo apt-add-repository ppa:ansible/ansible
@@ -66,5 +78,4 @@ This command will delete your new server and prevent you from incuring any charg
 
 #### Future Plans
 
-I plan to add support for Linode and Amazon in the future. I chose Digital Ocean for the starting point because they currently
-have better written Ansible documentation. 
+I plan to add support for Amazon in the future.
