@@ -31,6 +31,8 @@
   pre_tasks:
      - name: 'install python2'
        raw: sudo apt-get -y install python-simplejson
+     - name: 'install git'
+       raw: apt-get -y install git
   vars_files:
     - vars/main.yml
   roles:
