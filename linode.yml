@@ -1,0 +1,34 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+  - name: Create linode server
+    linode:
+      api_key: '{{ lookup('env','LIN_API_KEY') }}'
+      name: linodeserver
+      plan: 1                   #cheapest
+      datacenter: 6             #newmark NJ
+      distribution: 127         #centos 6.5
+      #password: '-AUX-PASSWORD-HERE'
+      #ssh_pub_key: 'ssh-rsa AAAAB3NzaC----RSA HERE-----'
+      ssh_key_file: '.ssh/id_rsa'
+
+      wait: yes
+      wait_timeout: 300
+      state: present
+    register: linode
+
+  - name: Adding the new box to the dynamic inventory
+    add_host: hostname="{{ linode.instance.ipv4  }}" groupname=linodehosts
+
+  - name: Wait for SSH to come up
+    local_action: wait_for host="{{ linode.instance.ipv4 }}" port=22 delay=60 timeout=320 state=started
+
+- name: Cooking the instance....
+  hosts: linodehosts
+  user: root
+  gather_facts: true
+  roles:
+    - base
