@@ -6,15 +6,13 @@
   tasks:
   - name: Create linode server
     linode:
-      api_key: '{{ lookup('env','LIN_API_KEY') }}'
+      api_key: "{{ lookup('env','LIN_API_KEY') }}"
       name: linodeserver
       plan: 1                   #cheapest
       datacenter: 6             #newmark NJ
       distribution: 127         #centos 6.5
       #password: '-AUX-PASSWORD-HERE'
-      #ssh_pub_key: 'ssh-rsa AAAAB3NzaC----RSA HERE-----'
-      ssh_key_file: '.ssh/id_rsa'
-
+      ssh_pub_key: "{{ lookup('env', 'PUB_KEY') }}"
       wait: yes
       wait_timeout: 300
       state: present
@@ -30,5 +28,3 @@
   hosts: linodehosts
   user: root
   gather_facts: true
-  roles:
-    - base
