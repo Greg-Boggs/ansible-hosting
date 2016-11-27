@@ -30,7 +30,7 @@
       name={{ item }}
       unique_name=yes
       size_id=512mb
-      region_id=sgp1
+      region_id=sfo2
       image_id=ubuntu-16-04-x64
       ssh_key_ids={{ my_ssh_key.ssh_key.id }}
       api_token={{ do_token }}
@@ -65,6 +65,16 @@
     - geerlingguy.ansible
     - mglaman.wp-cli
   tasks:
+    - name: Configure php-fpm pool (if enabled).
+      lineinfile:
+        dest: "{{ php_fpm_pool_conf_path }}"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      with_items:
+        - regexp: '^listen\.allowed_clients.?=.+$'
+          line: "listen.backlog = {{ php_listen_backlog }}"
+    - shell: echo "net.core.somaxconn=65536" >> /etc/sysctl.conf
     - service: name=nginx state=restarted
     - service: name=php7.0-fpm state=restarted
     - git: repo="https://github.com/WordPress/WordPress.git"
