@@ -10,7 +10,7 @@
       name: linodeserver
       plan: 1                   #cheapest
       datacenter: 6             #newmark NJ
-      distribution: 127         #centos 6.5
+      distribution: 146         #centos 6.5
       #password: '-AUX-PASSWORD-HERE'
       ssh_pub_key: "{{ lookup('env', 'PUB_KEY') }}"
       wait: yes
@@ -28,3 +28,38 @@
   hosts: linodehosts
   user: root
   gather_facts: true
+  pre_tasks:
+     - name: 'install python2'
+       raw: sudo apt-get -y install python-simplejson
+  vars_files:
+    - vars/main.yml
+  roles:
+    - geerlingguy.firewall
+    - geerlingguy.mysql
+    - geerlingguy.nginx
+    - geerlingguy.php
+    - geerlingguy.php-mysql
+    - geerlingguy.ansible
+    - mglaman.wp-cli
+  tasks:
+    - name: Configure php-fpm pool (if enabled).
+      lineinfile:
+        dest: "{{ php_fpm_pool_conf_path }}"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+        state: present
+      with_items:
+        - regexp: '^listen\.allowed_clients.?=.+$'
+          line: "listen.backlog = {{ php_listen_backlog }}"
+    - shell: echo "net.core.somaxconn=65536" >> /etc/sysctl.conf
+    - service: name=nginx state=restarted
+    - service: name=php7.0-fpm state=restarted
+    - git: repo="https://github.com/WordPress/WordPress.git"
+           dest=/root/html
+    - git: repo="https://github.com/Greg-Boggs/ansible-deploy.git"
+           dest=/root/ansible-deploy
+    - shell: ansible-galaxy install -r ansible-deploy/requirements.yml --force
+    - shell: ansible-playbook -i ansible-deploy/hosts ansible-deploy/deploy.yml
+    - shell: cd /var/www/current/html;wp core config --dbname=wp --dbuser=wp --dbpass=CHANGETHIS --allow-root;
+    - shell: cd /var/www/current/html;wp core install --allow-root --url="test.electricdev.net" --title="Electric Dev Test" --admin_user="electric_admin" --admin_password="workstest" --admin_email="me@gregboggs.com"
+
