@@ -9,7 +9,7 @@
       api_key: "{{ lookup('env','LIN_API_KEY') }}"
       name: linodeserver
       plan: 1                   #cheapest
-      datacenter: 6             #newmark NJ
+      datacenter: 3             #newmark NJ
       distribution: 146         #centos 6.5
       #password: '-AUX-PASSWORD-HERE'
       ssh_pub_key: "{{ lookup('env', 'PUB_KEY') }}"

@@ -77,7 +77,7 @@
     - shell: echo "net.core.somaxconn=65536" >> /etc/sysctl.conf
     - service: name=nginx state=restarted
     - service: name=php7.0-fpm state=restarted
-    - git: repo="https://github.com/WordPress/WordPress.git"
+    - git: repo="{{ LOCAL_GIT_REPO|default('https://github.com/WordPress/WordPress.git') }}"
            dest=/root/html
     - git: repo="https://github.com/Greg-Boggs/ansible-deploy.git"
            dest=/root/ansible-deploy
